@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
@@ -9,10 +10,12 @@ const tmi = require('tmi.js');
 const INDICATOR = '!';
 
 // Define our constants, you will change these with your own
-const TWITCH_CLIENT_ID = 'o7ivh6shrmxdof011l7usi2qnarmcq';
-const TWITCH_SECRET = 'ri8mqgmze0eag3hnf2hvqstv36n1ll';
-const SESSION_SECRET = 'ri8mqgmze0eag3hnf2hvqstv36n1ll';
-const CALLBACK_URL = 'http://localhost:3000/auth/twitch/callback';  // You can run locally with - http://localhost:3000/auth/twitch/callback
+const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
+const TWITCH_SECRET = process.env.TWITCH_SECRET;
+const SESSION_SECRET = process.env.TWITCH_SECRET;
+const CALLBACK_URL = process.env.CALLBACK_URL;
+
+console.log(TWITCH_CLIENT_ID);
 
 // Initialize Express and middlewares
 const app = express();
