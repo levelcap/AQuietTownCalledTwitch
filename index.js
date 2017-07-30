@@ -12,7 +12,7 @@ const INDICATOR = '!';
 // Define our constants, you will change these with your own
 const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
 const TWITCH_SECRET = process.env.TWITCH_SECRET;
-const SESSION_SECRET = process.env.TWITCH_SECRET;
+const SESSION_SECRET = process.env.SESSION_SECRET;
 const CALLBACK_URL = process.env.CALLBACK_URL;
 
 console.log(TWITCH_CLIENT_ID);
