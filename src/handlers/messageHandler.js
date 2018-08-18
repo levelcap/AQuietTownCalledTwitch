@@ -2,24 +2,26 @@ const _ = require('lodash');
 const COMMANDS = '!commands';
 const SHEET = '!sheet';
 const INFO = '!info';
-const MESSAGE_TYPES = [ COMMANDS, SHEET, INFO ];
+const MOVEIN = '!movein';
+const MESSAGE_TYPES = [ COMMANDS, SHEET, INFO, MOVEIN ];
 
 let client = null;
 
 const runCommands = (channel) => {
-  client.action(channel, 'Available commands: !info, !sheet');
+  client.say(channel, 'Available commands: !info, !sheet');
 };
 
 const runSheet = (channel, username) => {
-  client.action(channel, `${username} has a strength of 10 and a face of Ugly`);
+  client.say(channel, `${username} has a strength of 10 and a face of Ugly`);
 };
 
 const runInfo = (channel) => {
-  client.action(channel, 'AQuietTownCalledTwitch is a text based adventure game, I guess!');
+  client.say(channel, 'AQuietTownCalledTwitch is a text based adventure game, I guess!');
 };
 
 module.exports = (tmiClient) => {
   client = tmiClient;
+  const characterHandler = require('./characterHandler')(client);
 
   return {
     handleMessage: (channel, userstate, message) => {
@@ -37,6 +39,11 @@ module.exports = (tmiClient) => {
           case INFO:
             runInfo(channel);
             break;
+          case MOVEIN:
+            characterHandler.runMoveIn(channel, username, userId);
+            break;
+          default:
+            console.log(`No handler for command ${message}`);
         }
       } else {
         console.log('I dont know how to handle that message');
